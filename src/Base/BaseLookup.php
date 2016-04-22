@@ -90,20 +90,20 @@ abstract class BaseLookup
 			throw new GoogleGeocode\Exception\ApiException('Parsing the API response from body failed: ' . $response);
 		}
 		$responseStatus = mb_strtoupper($responseData['status']);
-		if ($responseStatus != 'OK') {
-			if ($responseStatus == 'OVER_QUERY_LIMIT') {
-				$exceptionMessage = 'Google Geocoder request limit reached';
-				if (isset($responseData['error_message'])) {
-					$exceptionMessage .= ': ' . $responseData['error_message'];
-				}
-				throw new GoogleGeocode\Exception\ApiLimitException($exceptionMessage);
-			} else if ($responseStatus == 'REQUEST_DENIED') {
-				$exceptionMessage = 'Google Geocoder request was denied';
-				if (isset($responseData['error_message'])) {
-					$exceptionMessage .= ': ' . $responseData['error_message'];
-				}
-				throw new GoogleGeocode\Exception\ApiLimitException($exceptionMessage);
+
+		if ($responseStatus == 'OVER_QUERY_LIMIT') {
+			$exceptionMessage = 'Google Geocoder request limit reached';
+			if (isset($responseData['error_message'])) {
+				$exceptionMessage .= ': ' . $responseData['error_message'];
 			}
+			throw new GoogleGeocode\Exception\ApiLimitException($exceptionMessage);
+		} else if ($responseStatus == 'REQUEST_DENIED') {
+			$exceptionMessage = 'Google Geocoder request was denied';
+			if (isset($responseData['error_message'])) {
+				$exceptionMessage .= ': ' . $responseData['error_message'];
+			}
+			throw new GoogleGeocode\Exception\ApiLimitException($exceptionMessage);
+		} else if ($responseStatus != 'OK') {
 			$exceptionMessage = 'Google Geocoder no results';
 			if (isset($responseData['error_message'])) {
 				$exceptionMessage .= ': ' . $responseData['error_message'];

@@ -22,7 +22,6 @@ class GooglePlacesLookup extends Base\BaseApiKeyGatedLookup
 	{
 		$requestUrl = self::API_BASE_URL . $this->encodeUrlParameter($googlePlacesId);
 		$requestUrl = $this->addApiKey($requestUrl);
-		fwrite(STDOUT, PHP_EOL . 'Using Google Places API key ' . $this->getApiKey() . PHP_EOL);
 		$responseData = $this->request($requestUrl);
 		$this
 			->clearResults()

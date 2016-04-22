@@ -12,10 +12,14 @@ class GooglePlacesLookupTest extends \PHPUnit_Framework_TestCase
 
 	public function testLookupSuccess()
 	{
+		// Receive the Google Places API key from env
+		$googlePlacesApiKey = getenv('GOOGLE_PLACES_API_KEY');
+		fwrite(STDOUT, PHP_EOL . 'Using Google Places API key ' . $googlePlacesApiKey . PHP_EOL);
+
 		// Perform lookup
 		$googlePlacesLookup = new GooglePlacesLookup();
 		$googlePlacesLookup
-			->setApiKey(getenv('GOOGLE_PLACES_API_KEY'))
+			->setApiKey($googlePlacesApiKey)
 			->lookup('ChIJ_zNzWmpWskcRP8DWT5eX5jQ');
 
 		// Validate results
