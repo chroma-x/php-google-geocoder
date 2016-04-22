@@ -23,7 +23,6 @@ class GooglePlacesLookupTest extends \PHPUnit_Framework_TestCase
 		parent::__construct();
 		// Receive the Google Places API key from env
 		$this->googlePlacesApiKey = getenv('GOOGLE_PLACES_API_KEY');
-		fwrite(STDOUT, PHP_EOL . 'Using Google Places API key ' . $this->googlePlacesApiKey . PHP_EOL);
 	}
 
 	public function testLookupSuccess()
