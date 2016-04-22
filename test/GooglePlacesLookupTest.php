@@ -15,7 +15,7 @@ class GooglePlacesLookupTest extends \PHPUnit_Framework_TestCase
 		// Perform lookup
 		$googlePlacesLookup = new GooglePlacesLookup();
 		$googlePlacesLookup
-			->setApiKey(getenv('google_places_api_key'))
+			->setApiKey(getenv('GOOGLE_PLACES_API_KEY'))
 			->lookup('ChIJ_zNzWmpWskcRP8DWT5eX5jQ');
 
 		// Validate results
