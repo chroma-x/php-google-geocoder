@@ -1,5 +1,9 @@
 # PHP Google Geocoder
 
+[![Latest Stable Version](https://poser.pugx.org/markenwerk/google-geocoder/v/stable)](https://packagist.org/packages/markenwerk/google-geocoder)
+[![Total Downloads](https://poser.pugx.org/markenwerk/google-geocoder/downloads)](https://packagist.org/packages/markenwerk/google-geocoder)
+[![License](https://poser.pugx.org/markenwerk/google-geocoder/license)](https://packagist.org/packages/markenwerk/google-geocoder)
+
 A PHP library to query Google's location service for geolocation lookup based on a given address.
 
 ## Installation
