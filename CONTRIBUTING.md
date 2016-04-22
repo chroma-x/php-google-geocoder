@@ -1,4 +1,4 @@
-# Contributing to ISO3166 Country Information
+# Contributing to PHP Google Geocoder
 
 ## About
 
@@ -70,22 +70,22 @@ We’ve found that test-first development really helps make features better arch
 
 ## Full example
 
-Here’s an example workflow for `php-iso3166-country-information` hosted on Github, which is currently in version 2.0.7. Your username is `yourname` and you’re submitting a basic bugfix. 
+Here’s an example workflow for `php-google-geocoder` hosted on Github, which is currently in version 1.0.0. Your username is `yourname` and you’re submitting a basic bugfix. 
 
 ### Preparing your Fork
 
-- Hit ‘fork’ on Github, creating e.g. `yourname/php-iso3166-country-information`
+- Hit ‘fork’ on Github, creating e.g. `yourname/php-google-geocoder`
 - Clone your project  
 
 ```
-git clone git@github.com:yourname/php-iso3166-country-information
+git clone git@github.com:yourname/php-google-geocoder
 ```
 
 - Create a branch
 
 ```
-cd php-iso3166-country-information
-git checkout -b fix-issue-269 2.0.7
+cd php-google-geocoder
+git checkout -b fix-issue-269 1.0.0
 ```
 
 ### Making your Changes
