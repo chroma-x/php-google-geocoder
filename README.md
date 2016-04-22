@@ -203,7 +203,7 @@ try{
 
 ### Resolving a Google Places ID
 
-Resolving Google Places IDs utilizes the Google Places API. Therefore a Places API key is mandatory for performing a lookup. Please visit [the Google API console](https://console.developers.google.com/apis/api/geocoding_backend?project=_) to receive an API key.
+Resolving Google Places IDs utilizes the Google Places API. Therefore a Places API key is mandatory for performing a lookup. Please visit the [Google API console](https://console.developers.google.com/apis/api/geocoding_backend?project=_) to receive an API key.
 
 ```{php}
 try{

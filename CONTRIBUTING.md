@@ -68,6 +68,14 @@ Any bugfix that doesn’t include a test proving the existence of the bug being 
 
 We’ve found that test-first development really helps make features better architected and identifies potential edge cases earlier instead of later. Writing tests before the implementation is strongly encouraged.
 
+#### Test preconditions
+
+Sometimes tests need some extra information gathered from environment variables. Please setup the following environment variables in your test setup. PHPUnit and Travis allow to simply adding them to test environment. 
+
+| Environment variable name | Description |
+| --- | --- |
+| GOOGLE_PLACES_API_KEY | The Google Places API key used to perform the tests defined in `GooglePlacesLookupTest`. If you do not already hav a valid Google Places API key, just grab one from the [Google API console](https://console.developers.google.com/apis/api/geocoding_backend?project=_).
+
 ## Full example
 
 Here’s an example workflow for `php-google-geocoder` hosted on Github, which is currently in version 1.0.2. Your username is `yourname` and you’re submitting a basic bugfix. 
