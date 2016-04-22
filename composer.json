@@ -1,0 +1,31 @@
+{
+  "name": "markenwerk/google-geocoder",
+  "type": "library",
+  "description": "A PHP library to query Google's location service for geolocation lookup based on a given address.",
+  "keywords": [
+    "Google",
+    "Geolocation",
+    "Geolookup"
+  ],
+  "homepage": "http://markenwerk.net/",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Martin Brecht-Precht",
+      "email": "mb@markenwerk.net",
+      "homepage": "http://markenwerk.net"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "GoogleGeocode\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=5.3"
+  },
+  "require-dev":{
+    "phpunit/phpunit": "~4.8",
+    "codeclimate/php-test-reporter": "dev-master"
+  }
+}
