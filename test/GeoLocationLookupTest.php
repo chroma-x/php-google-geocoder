@@ -60,8 +60,8 @@ class GeoLocationLookupTest extends \PHPUnit_Framework_TestCase
 	public function testLookupFailure()
 	{
 		$this->setExpectedException(get_class(new Exception\ApiNoResultsException()));
-		$addressLookup = new AddressLookup();
-		$addressLookup->lookup('China, Bejing, Lornsenstraße 43');
+		$geoLocationLookup = new GeoLocationLookup();
+		$geoLocationLookup->lookup(1000000, 1000000);
 	}
 
 }

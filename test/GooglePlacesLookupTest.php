@@ -10,16 +10,28 @@ namespace GoogleGeocode;
 class GooglePlacesLookupTest extends \PHPUnit_Framework_TestCase
 {
 
+	/**
+	 * @var string
+	 */
+	private $googlePlacesApiKey;
+
+	/**
+	 * GooglePlacesLookupTest constructor.
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+		// Receive the Google Places API key from env
+		$this->googlePlacesApiKey = getenv('GOOGLE_PLACES_API_KEY');
+		fwrite(STDOUT, PHP_EOL . 'Using Google Places API key ' . $this->googlePlacesApiKey . PHP_EOL);
+	}
+
 	public function testLookupSuccess()
 	{
-		// Receive the Google Places API key from env
-		$googlePlacesApiKey = getenv('GOOGLE_PLACES_API_KEY');
-		fwrite(STDOUT, PHP_EOL . 'Using Google Places API key ' . $googlePlacesApiKey . PHP_EOL);
-
 		// Perform lookup
 		$googlePlacesLookup = new GooglePlacesLookup();
 		$googlePlacesLookup
-			->setApiKey($googlePlacesApiKey)
+			->setApiKey($this->googlePlacesApiKey)
 			->lookup('ChIJ_zNzWmpWskcRP8DWT5eX5jQ');
 
 		// Validate results
@@ -63,11 +75,22 @@ class GooglePlacesLookupTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals('ChIJ_zNzWmpWskcRP8DWT5eX5jQ', $firstResult->getGooglePlacesId());
 	}
 
-	public function testLookupFailure()
+	public function testLookupNoResults()
 	{
 		$this->setExpectedException(get_class(new Exception\ApiNoResultsException()));
-		$addressLookup = new AddressLookup();
-		$addressLookup->lookup('China, Bejing, Lornsenstraße 43');
+		$googlePlacesLookup = new GooglePlacesLookup();
+		$googlePlacesLookup
+			->setApiKey($this->googlePlacesApiKey)
+			->lookup('NO_VALID_PLACES_ID');
+	}
+
+	public function testLookupApiKey()
+	{
+		$this->setExpectedException(get_class(new Exception\ApiException()));
+		$googlePlacesLookup = new GooglePlacesLookup();
+		$googlePlacesLookup
+			->setApiKey('INVALID_API_KEY')
+			->lookup('ChIJ_zNzWmpWskcRP8DWT5eX5jQ');
 	}
 
 }

@@ -86,31 +86,47 @@ abstract class BaseLookup
 			throw new GoogleGeocode\Exception\NetworkException('Curling the API endpoint ' . $url . ' failed.');
 		}
 		$responseData = @json_decode($response, true);
-		if (is_null($responseData) || !is_array($responseData) || !isset($responseData['status'])) {
-			throw new GoogleGeocode\Exception\ApiException('Parsing the API response from body failed: ' . $response);
-		}
-		$responseStatus = mb_strtoupper($responseData['status']);
+		$this->validateResponse($response, $responseData);
+		return $responseData;
+	}
 
+	/**
+	 * @param string $rawResponse
+	 * @param array|string $responseData
+	 * @throws GoogleGeocode\Exception\ApiException
+	 * @throws GoogleGeocode\Exception\ApiLimitException
+	 * @throws GoogleGeocode\Exception\ApiNoResultsException
+	 */
+	private function validateResponse($rawResponse, $responseData)
+	{
+		if (is_null($responseData) || !is_array($responseData) || !isset($responseData['status'])) {
+			throw new GoogleGeocode\Exception\ApiException('Parsing the API response from body failed: ' . $rawResponse);
+		}
+
+		$responseStatus = mb_strtoupper($responseData['status']);
 		if ($responseStatus == 'OVER_QUERY_LIMIT') {
-			$exceptionMessage = 'Google Geocoder request limit reached';
-			if (isset($responseData['error_message'])) {
-				$exceptionMessage .= ': ' . $responseData['error_message'];
-			}
+			$exceptionMessage = $this->buildExceptionMessage('Google Geocoder request limit reached', $responseData);
 			throw new GoogleGeocode\Exception\ApiLimitException($exceptionMessage);
 		} else if ($responseStatus == 'REQUEST_DENIED') {
-			$exceptionMessage = 'Google Geocoder request was denied';
-			if (isset($responseData['error_message'])) {
-				$exceptionMessage .= ': ' . $responseData['error_message'];
-			}
-			throw new GoogleGeocode\Exception\ApiLimitException($exceptionMessage);
+			$exceptionMessage = $this->buildExceptionMessage('Google Geocoder request was denied', $responseData);
+			throw new GoogleGeocode\Exception\ApiException($exceptionMessage);
 		} else if ($responseStatus != 'OK') {
-			$exceptionMessage = 'Google Geocoder no results';
-			if (isset($responseData['error_message'])) {
-				$exceptionMessage .= ': ' . $responseData['error_message'];
-			}
+			$exceptionMessage = $this->buildExceptionMessage('Google Geocoder no results', $responseData);
 			throw new GoogleGeocode\Exception\ApiNoResultsException($exceptionMessage);
 		}
-		return $responseData;
+	}
+
+	/**
+	 * @param string $exceptionMessage
+	 * @param array $responseData
+	 * @return string
+	 */
+	private function buildExceptionMessage($exceptionMessage, array $responseData)
+	{
+		if (isset($responseData['error_message'])) {
+			$exceptionMessage .= ': ' . $responseData['error_message'];
+		}
+		return $exceptionMessage;
 	}
 
 	/**
