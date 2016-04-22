@@ -23,15 +23,9 @@ class GeoLocationLookup extends Base\BaseLookup
 	{
 		$requestUrl = self::API_BASE_URL . $this->encodeUrlParameter($latitude . ',' . $longitude);
 		$responseData = $this->request($requestUrl);
-		$this->clearResults();
-		for ($i = 0; $i < count($responseData['results']); $i++) {
-			$address = $responseData['results'][$i]['address_components'];
-			$geometry = $responseData['results'][$i]['geometry'];
-			$placesId = $responseData['results'][$i]['place_id'];
-			$locationAddress = new GeoLocation\GeoLocationAddress($address);
-			$locationGeometry = new GeoLocation\GeoLocationGeometry($geometry);
-			$this->addResult(new GeoLookupResult($locationAddress, $locationGeometry, $placesId));
-		}
+		$this
+			->clearResults()
+			->addResultsFromResponse($responseData);
 		return $this;
 	}
 

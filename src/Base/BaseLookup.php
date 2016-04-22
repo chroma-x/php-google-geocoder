@@ -114,6 +114,23 @@ abstract class BaseLookup
 	}
 
 	/**
+	 * @param $responseData
+	 * @return $this
+	 */
+	protected function addResultsFromResponse($responseData)
+	{
+		for ($i = 0; $i < count($responseData['results']); $i++) {
+			$address = $responseData['results'][$i]['address_components'];
+			$geometry = $responseData['results'][$i]['geometry'];
+			$placesId = $responseData['results'][$i]['place_id'];
+			$locationAddress = new GoogleGeocode\GeoLocation\GeoLocationAddress($address);
+			$locationGeometry = new GoogleGeocode\GeoLocation\GeoLocationGeometry($geometry);
+			$this->addResult(new GoogleGeocode\GeoLookupResult($locationAddress, $locationGeometry, $placesId));
+		}
+		return $this;
+	}
+
+	/**
 	 * Returns the address as pseudo url encoded utf8 string
 	 *
 	 * @param string $urlParameter
