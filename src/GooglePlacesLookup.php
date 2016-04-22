@@ -3,24 +3,25 @@
 namespace GoogleGeocode;
 
 /**
- * Class AddressLookup
+ * Class GooglePlacesLookup
  *
  * @package GoogleGeocode
  */
-class AddressLookup extends Base\BaseLookup
+class GooglePlacesLookup extends Base\BaseApiKeyGatedLookup
 {
 
 	/**
-	 * @param string $address
+	 * @param string $googlePlacesId
 	 * @return $this
 	 * @throws Exception\ApiException
 	 * @throws Exception\ApiLimitException
 	 * @throws Exception\ApiNoResultsException
 	 * @throws Exception\NetworkException
 	 */
-	public function lookup($address)
+	public function lookup($googlePlacesId)
 	{
-		$requestUrl = self::API_BASE_URL . $this->encodeUrlParameter($address);
+		$requestUrl = self::API_BASE_URL . $this->encodeUrlParameter($googlePlacesId);
+		$requestUrl = $this->addApiKey($requestUrl);
 		$responseData = $this->request($requestUrl);
 		$this->clearResults();
 		for ($i = 0; $i < count($responseData['results']); $i++) {
@@ -40,7 +41,7 @@ class AddressLookup extends Base\BaseLookup
 	 */
 	protected function encodeUrlParameter($urlParameter)
 	{
-		return '&address=' . parent::encodeUrlParameter($urlParameter);
+		return '&place_id=' . parent::encodeUrlParameter($urlParameter);
 	}
 
 }

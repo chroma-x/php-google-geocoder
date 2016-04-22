@@ -7,7 +7,7 @@ namespace GoogleGeocode;
  *
  * @package GoogleGeocode
  */
-class AddressLookupResult
+class GeoLookupResult
 {
 
 	/**

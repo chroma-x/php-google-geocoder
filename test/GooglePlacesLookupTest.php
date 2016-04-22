@@ -3,22 +3,24 @@
 namespace GoogleGeocode;
 
 /**
- * Class AddressLookupTest
+ * Class GooglePlacesLookupTest
  *
  * @package GoogleGeocode
  */
-class AddressLookupTest extends \PHPUnit_Framework_TestCase
+class GooglePlacesLookupTest extends \PHPUnit_Framework_TestCase
 {
 
 	public function testLookupSuccess()
 	{
 		// Perform lookup
-		$addressLookup = new AddressLookup();
-		$addressLookup->lookup('Germany, 24105 Kiel, Lornsenstraße 43');
+		$googlePlacesLookup = new GooglePlacesLookup();
+		$googlePlacesLookup
+			->setApiKey(getenv('google_places_api_key'))
+			->lookup('ChIJ_zNzWmpWskcRP8DWT5eX5jQ');
 
 		// Validate results
-		$this->assertEquals(1, $addressLookup->getResultCount());
-		$firstResult = $addressLookup->getFirstResult();
+		$this->assertEquals(1, $googlePlacesLookup->getResultCount());
+		$firstResult = $googlePlacesLookup->getFirstResult();
 		$this->assertInstanceOf('GoogleGeocode\\GeoLookupResult', $firstResult);
 
 		// Address result

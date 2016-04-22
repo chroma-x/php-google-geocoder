@@ -70,7 +70,7 @@ We’ve found that test-first development really helps make features better arch
 
 ## Full example
 
-Here’s an example workflow for `php-google-geocoder` hosted on Github, which is currently in version 1.0.0. Your username is `yourname` and you’re submitting a basic bugfix. 
+Here’s an example workflow for `php-google-geocoder` hosted on Github, which is currently in version 1.0.2. Your username is `yourname` and you’re submitting a basic bugfix. 
 
 ### Preparing your Fork
 
