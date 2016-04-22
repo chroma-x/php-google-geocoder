@@ -23,18 +23,25 @@ class AddressLookupTest extends \PHPUnit_Framework_TestCase
 
 		// Address result
 		$addressResult = $firstResult->getAddress();
+		$this->assertTrue($addressResult->hasStreetNumber());
 		$this->assertEquals('43', $addressResult->getStreetNumber()->getShortName());
 		$this->assertEquals('43', $addressResult->getStreetNumber()->getLongName());
+		$this->assertTrue($addressResult->hasStreetName());
 		$this->assertEquals('Lornsenstraße', $addressResult->getStreetName()->getShortName());
 		$this->assertEquals('Lornsenstraße', $addressResult->getStreetName()->getLongName());
+		$this->assertTrue($addressResult->hasCity());
 		$this->assertEquals('KI', $addressResult->getCity()->getShortName());
 		$this->assertEquals('Kiel', $addressResult->getCity()->getLongName());
+		$this->assertTrue($addressResult->hasPostalCode());
 		$this->assertEquals('24105', $addressResult->getPostalCode()->getShortName());
 		$this->assertEquals('24105', $addressResult->getPostalCode()->getLongName());
+		$this->assertTrue($addressResult->hasArea());
 		$this->assertEquals('Ravensberg - Brunswik - Düsternbrook', $addressResult->getArea()->getShortName());
 		$this->assertEquals('Ravensberg - Brunswik - Düsternbrook', $addressResult->getArea()->getLongName());
+		$this->assertTrue($addressResult->hasProvince());
 		$this->assertEquals('SH', $addressResult->getProvince()->getShortName());
 		$this->assertEquals('Schleswig-Holstein', $addressResult->getProvince()->getLongName());
+		$this->assertTrue($addressResult->hasCountry());
 		$this->assertEquals('DE', $addressResult->getCountry()->getShortName());
 		$this->assertEquals('Germany', $addressResult->getCountry()->getLongName());
 

@@ -13,17 +13,17 @@ class GeoLookupResult
 	/**
 	 * @var GeoLocation\GeoLocationAddress
 	 */
-	private $address;
+	private $address = null;
 
 	/**
 	 * @var GeoLocation\GeoLocationGeometry
 	 */
-	private $geometry;
+	private $geometry = null;
 
 	/**
 	 * @var string
 	 */
-	private $googlePlacesId;
+	private $googlePlacesId = null;
 
 	/**
 	 * GeoLocation constructor.
@@ -61,6 +61,30 @@ class GeoLookupResult
 	public function getGooglePlacesId()
 	{
 		return $this->googlePlacesId;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function hasAddress()
+	{
+		return !is_null($this->address);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function hasGeometry()
+	{
+		return !is_null($this->geometry);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function hasGooglePlacesId()
+	{
+		return !is_null($this->googlePlacesId);
 	}
 
 }

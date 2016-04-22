@@ -21,37 +21,37 @@ class GeoLocationAddress
 	/**
 	 * @var GeoLocationAddressComponent
 	 */
-	private $streetNumber;
+	private $streetNumber = null;
 
 	/**
 	 * @var GeoLocationAddressComponent
 	 */
-	private $streetName;
+	private $streetName = null;
 
 	/**
 	 * @var GeoLocationAddressComponent
 	 */
-	private $city;
+	private $city = null;
 
 	/**
 	 * @var GeoLocationAddressComponent
 	 */
-	private $postalCode;
+	private $postalCode = null;
 
 	/**
 	 * @var GeoLocationAddressComponent
 	 */
-	private $area;
+	private $area = null;
 
 	/**
 	 * @var GeoLocationAddressComponent
 	 */
-	private $province;
+	private $province = null;
 
 	/**
 	 * @var GeoLocationAddressComponent
 	 */
-	private $country;
+	private $country = null;
 
 	/**
 	 * GeoLocationAddress constructor.
@@ -132,6 +132,62 @@ class GeoLocationAddress
 	public function getCountry()
 	{
 		return $this->country;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function hasStreetNumber()
+	{
+		return !is_null($this->streetNumber);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function hasStreetName()
+	{
+		return !is_null($this->streetName);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function hasCity()
+	{
+		return !is_null($this->city);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function hasPostalCode()
+	{
+		return !is_null($this->postalCode);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function hasArea()
+	{
+		return !is_null($this->area);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function hasProvince()
+	{
+		return !is_null($this->province);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function hasCountry()
+	{
+		return !is_null($this->country);
 	}
 
 	/**

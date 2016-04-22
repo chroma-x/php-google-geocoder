@@ -13,12 +13,12 @@ class GeoLocationGeometry
 	/**
 	 * @var GeoLocation
 	 */
-	private $location;
+	private $location = null;
 
 	/**
 	 * @var GeoLocationViewport
 	 */
-	private $viewport;
+	private $viewport = null;
 
 	/**
 	 * GeoLocationGeometry constructor.
@@ -54,6 +54,22 @@ class GeoLocationGeometry
 	public function getViewport()
 	{
 		return $this->viewport;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function hasLocation()
+	{
+		return !is_null($this->location);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function hasViewport()
+	{
+		return !is_null($this->viewport);
 	}
 
 }

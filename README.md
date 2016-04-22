@@ -29,7 +29,9 @@ require_once('path/to/vendor/autoload.php');
 
 ---
 
-### Resolving an address
+### Performing a GeoLookup
+
+#### Resolving an address
 
 ```{php}
 try{
@@ -46,61 +48,6 @@ try{
 	// Retrieving the first lookup result as GoogleGeocode\GeoLookupResult instance
 	$firstResult = $addressLookup->getFirstResult();
 
-	// Retrieving the address information from the lookup result
-	// Returns 'Lornsenstraße'
-	$addressStreetShort = $firstResult->getAddress()->getStreetName()->getShortName();
-	// Returns 'Lornsenstraße'
-	$addressStreetLong = $firstResult->getAddress()->getStreetName()->getLongName();
-
-	// Returns '43'
-	$addressStreetNumberShort = $firstResult->getAddress()->getStreetNumber()->getShortName();
-	// Returns '43'
-	$addressStreetNumberLong = $firstResult->getAddress()->getStreetNumber()->getLongName();
-
-	// Returns '24105'
-	$addressPostalCodeShort = $firstResult->getAddress()->getPostalCode()->getShortName();
-	// Returns '24105'
-	$addressPostalCodeLong = $firstResult->getAddress()->getPostalCode()->getLongName();
-
-	// Returns 'KI'
-	$addressCityShort = $firstResult->getAddress()->getCity()->getShortName();
-	// Returns 'Kiel'
-	$addressCityLong = $firstResult->getAddress()->getCity()->getLongName();
-
-	// Returns 'Ravensberg - Brunswik - Düsternbrook'
-	$addressAreaShort = $firstResult->getAddress()->getArea()->getShortName();
-	// Returns 'Ravensberg - Brunswik - Düsternbrook'
-	$addressAreaLong = $firstResult->getAddress()->getArea()->getLongName();
-
-	// Returns 'SH'
-	$addressProvinceShort = $firstResult->getAddress()->getProvince()->getShortName();
-	// Returns 'Schleswig-Holstein'
-	$addressProvinceLong = $firstResult->getAddress()->getProvince()->getLongName();
-
-	// Returns 'DE'
-	$addressCountryShort = $firstResult->getAddress()->getCountry()->getShortName();
-	// Returns 'Germany'
-	$addressCountryLong = $firstResult->getAddress()->getCountry()->getLongName();
-
-	// Retrieving the geometry information from the lookup result
-	// Returns 54.334123
-	$geometryLocationLatitude = $firstResult->getGeometry()->getLocation()->getLatitude();
-	// Returns 10.1364007
-	$geometryLocationLatitude = $firstResult->getGeometry()->getLocation()->getLongitude();
-
-	// Returns 54.335471980291
-	$geometryLocationLatitude = $firstResult->getGeometry()->getViewport()->getNortheast()->getLatitude();
-	// Returns 10.137749680292
-	$geometryLocationLatitude = $firstResult->getGeometry()->getViewport()->getNortheast()->getLongitude();
-	// Returns 54.332774019708
-	$geometryLocationLatitude = $firstResult->getGeometry()->getViewport()->getSouthwest()->getLatitude();
-	// Returns 10.135051719708
-	$geometryLocationLatitude = $firstResult->getGeometry()->getViewport()->getSouthwest()->getLongitude();
-
-	// Retrieving the Google Places information from the lookup result
-	// Returns 'ChIJ_zNzWmpWskcRP8DWT5eX5jQ'
-	$googlePlacesId = $firstResult->getGooglePlacesId();
-
 } catch (GoogleGeocode\Exception\NetworkException $exception) {
 	// Google Geocode API is not reachable or curl failed
 } catch (GoogleGeocode\Exception\ApiException $exception) {
@@ -113,9 +60,7 @@ try{
 
 ```
 
----
-
-### Resolving a geo location
+#### Resolving a geo location
 
 ```{php}
 try{
@@ -132,61 +77,6 @@ try{
 	// Retrieving the first lookup result as GoogleGeocode\AddressLookupResult instance
 	$firstResult = $geoLocationLookup->getFirstResult();
 
-	// Retrieving the address information from the lookup result
-	// Returns 'Lornsenstraße'
-	$addressStreetShort = $firstResult->getAddress()->getStreetName()->getShortName();
-	// Returns 'Lornsenstraße'
-	$addressStreetLong = $firstResult->getAddress()->getStreetName()->getLongName();
-
-	// Returns '43'
-	$addressStreetNumberShort = $firstResult->getAddress()->getStreetNumber()->getShortName();
-	// Returns '43'
-	$addressStreetNumberLong = $firstResult->getAddress()->getStreetNumber()->getLongName();
-
-	// Returns '24105'
-	$addressPostalCodeShort = $firstResult->getAddress()->getPostalCode()->getShortName();
-	// Returns '24105'
-	$addressPostalCodeLong = $firstResult->getAddress()->getPostalCode()->getLongName();
-
-	// Returns 'KI'
-	$addressCityShort = $firstResult->getAddress()->getCity()->getShortName();
-	// Returns 'Kiel'
-	$addressCityLong = $firstResult->getAddress()->getCity()->getLongName();
-
-	// Returns 'Ravensberg - Brunswik - Düsternbrook'
-	$addressAreaShort = $firstResult->getAddress()->getArea()->getShortName();
-	// Returns 'Ravensberg - Brunswik - Düsternbrook'
-	$addressAreaLong = $firstResult->getAddress()->getArea()->getLongName();
-
-	// Returns 'SH'
-	$addressProvinceShort = $firstResult->getAddress()->getProvince()->getShortName();
-	// Returns 'Schleswig-Holstein'
-	$addressProvinceLong = $firstResult->getAddress()->getProvince()->getLongName();
-
-	// Returns 'DE'
-	$addressCountryShort = $firstResult->getAddress()->getCountry()->getShortName();
-	// Returns 'Germany'
-	$addressCountryLong = $firstResult->getAddress()->getCountry()->getLongName();
-
-	// Retrieving the geometry information from the lookup result
-	// Returns 54.334123
-	$geometryLocationLatitude = $firstResult->getGeometry()->getLocation()->getLatitude();
-	// Returns 10.1364007
-	$geometryLocationLatitude = $firstResult->getGeometry()->getLocation()->getLongitude();
-
-	// Returns 54.335471980291
-	$geometryLocationLatitude = $firstResult->getGeometry()->getViewport()->getNortheast()->getLatitude();
-	// Returns 10.137749680292
-	$geometryLocationLatitude = $firstResult->getGeometry()->getViewport()->getNortheast()->getLongitude();
-	// Returns 54.332774019708
-	$geometryLocationLatitude = $firstResult->getGeometry()->getViewport()->getSouthwest()->getLatitude();
-	// Returns 10.135051719708
-	$geometryLocationLatitude = $firstResult->getGeometry()->getViewport()->getSouthwest()->getLongitude();
-
-	// Retrieving the Google Places information from the lookup result
-	// Returns 'ChIJ_zNzWmpWskcRP8DWT5eX5jQ'
-	$googlePlacesId = $firstResult->getGooglePlacesId();
-
 } catch (GoogleGeocode\Exception\NetworkException $exception) {
 	// Google Geocode API is not reachable or curl failed
 } catch (GoogleGeocode\Exception\ApiException $exception) {
@@ -199,9 +89,7 @@ try{
 
 ```
 
----
-
-### Resolving a Google Places ID
+#### Resolving a Google Places ID
 
 Resolving Google Places IDs utilizes the Google Places API. Therefore a Places API key is mandatory for performing a lookup. Please visit the [Google API console](https://console.developers.google.com/apis/api/geocoding_backend?project=_) to receive an API key.
 
@@ -222,61 +110,6 @@ try{
 	// Retrieving the first lookup result as GoogleGeocode\AddressLookupResult instance
 	$firstResult = $googlePlacesLookup->getFirstResult();
 
-	// Retrieving the address information from the lookup result
-	// Returns 'Lornsenstraße'
-	$addressStreetShort = $firstResult->getAddress()->getStreetName()->getShortName();
-	// Returns 'Lornsenstraße'
-	$addressStreetLong = $firstResult->getAddress()->getStreetName()->getLongName();
-
-	// Returns '43'
-	$addressStreetNumberShort = $firstResult->getAddress()->getStreetNumber()->getShortName();
-	// Returns '43'
-	$addressStreetNumberLong = $firstResult->getAddress()->getStreetNumber()->getLongName();
-
-	// Returns '24105'
-	$addressPostalCodeShort = $firstResult->getAddress()->getPostalCode()->getShortName();
-	// Returns '24105'
-	$addressPostalCodeLong = $firstResult->getAddress()->getPostalCode()->getLongName();
-
-	// Returns 'KI'
-	$addressCityShort = $firstResult->getAddress()->getCity()->getShortName();
-	// Returns 'Kiel'
-	$addressCityLong = $firstResult->getAddress()->getCity()->getLongName();
-
-	// Returns 'Ravensberg - Brunswik - Düsternbrook'
-	$addressAreaShort = $firstResult->getAddress()->getArea()->getShortName();
-	// Returns 'Ravensberg - Brunswik - Düsternbrook'
-	$addressAreaLong = $firstResult->getAddress()->getArea()->getLongName();
-
-	// Returns 'SH'
-	$addressProvinceShort = $firstResult->getAddress()->getProvince()->getShortName();
-	// Returns 'Schleswig-Holstein'
-	$addressProvinceLong = $firstResult->getAddress()->getProvince()->getLongName();
-
-	// Returns 'DE'
-	$addressCountryShort = $firstResult->getAddress()->getCountry()->getShortName();
-	// Returns 'Germany'
-	$addressCountryLong = $firstResult->getAddress()->getCountry()->getLongName();
-
-	// Retrieving the geometry information from the lookup result
-	// Returns 54.334123
-	$geometryLocationLatitude = $firstResult->getGeometry()->getLocation()->getLatitude();
-	// Returns 10.1364007
-	$geometryLocationLatitude = $firstResult->getGeometry()->getLocation()->getLongitude();
-
-	// Returns 54.335471980291
-	$geometryLocationLatitude = $firstResult->getGeometry()->getViewport()->getNortheast()->getLatitude();
-	// Returns 10.137749680292
-	$geometryLocationLatitude = $firstResult->getGeometry()->getViewport()->getNortheast()->getLongitude();
-	// Returns 54.332774019708
-	$geometryLocationLatitude = $firstResult->getGeometry()->getViewport()->getSouthwest()->getLatitude();
-	// Returns 10.135051719708
-	$geometryLocationLatitude = $firstResult->getGeometry()->getViewport()->getSouthwest()->getLongitude();
-
-	// Retrieving the Google Places information from the lookup result
-	// Returns 'ChIJ_zNzWmpWskcRP8DWT5eX5jQ'
-	$googlePlacesId = $firstResult->getGooglePlacesId();
-
 } catch (GoogleGeocode\Exception\NetworkException $exception) {
 	// Google Geocode API is not reachable or curl failed
 } catch (GoogleGeocode\Exception\ApiException $exception) {
@@ -287,6 +120,105 @@ try{
 	// Google Geocode API request had no result
 }
 
+```
+
+---
+
+### Reading from a GeoLookupResult
+
+**Attention:** Plaese note that all getter methods on the `GeoLocationAddress` return a `GeoLocationAddressComponent` instance or `null`. For preventing calls on non-objects the `GeoLocationAddress` class provides methods to check whether the address components exists. 
+
+```{php}
+// Retrieving the first lookup result as GoogleGeocode\GeoLookupResult instance
+$firstResult = $addressLookup->getFirstResult();
+
+// Retieving address information as GoogleGeocode\GeoLocation\GeoLocationAddress
+$geoLocationAddress = $firstResult->getAddress();
+
+if($firstResult->hasAddress()) {
+
+	// Retrieving the address information from the lookup result
+
+	if($firstResult->getAddress()->hasStreetName()) {
+		// Returns 'Lornsenstraße'
+		$addressStreetShort = $firstResult->getAddress()->getStreetName()->getShortName();
+		// Returns 'Lornsenstraße'
+		$addressStreetLong = $firstResult->getAddress()->getStreetName()->getLongName();
+	}
+
+	if($firstResult->getAddress()->hasStreetNumber()) {
+		// Returns '43'
+		$addressStreetNumberShort = $firstResult->getAddress()->getStreetNumber()->getShortName();
+		// Returns '43'
+		$addressStreetNumberLong = $firstResult->getAddress()->getStreetNumber()->getLongName();
+	}
+
+	if($firstResult->getAddress()->hasPostalCode()) {
+		// Returns '24105'
+		$addressPostalCodeShort = $firstResult->getAddress()->getPostalCode()->getShortName();
+		// Returns '24105'
+		$addressPostalCodeLong = $firstResult->getAddress()->getPostalCode()->getLongName();
+	}
+
+	if($firstResult->getAddress()->hasCity()) {
+		// Returns 'KI'
+		$addressCityShort = $firstResult->getAddress()->getCity()->getShortName();
+		// Returns 'Kiel'
+		$addressCityLong = $firstResult->getAddress()->getCity()->getLongName();
+	}
+
+	if($firstResult->getAddress()->hasArea()) {
+		// Returns 'Ravensberg - Brunswik - Düsternbrook'
+		$addressAreaShort = $firstResult->getAddress()->getArea()->getShortName();
+		// Returns 'Ravensberg - Brunswik - Düsternbrook'
+		$addressAreaLong = $firstResult->getAddress()->getArea()->getLongName();
+	}
+
+	if($firstResult->getAddress()->hasProvince()) {
+		// Returns 'SH'
+		$addressProvinceShort = $firstResult->getAddress()->getProvince()->getShortName();
+		// Returns 'Schleswig-Holstein'
+		$addressProvinceLong = $firstResult->getAddress()->getProvince()->getLongName();
+	}
+
+	if($firstResult->getAddress()->hasCountry()) {
+		// Returns 'DE'
+		$addressCountryShort = $firstResult->getAddress()->getCountry()->getShortName();
+		// Returns 'Germany'
+		$addressCountryLong = $firstResult->getAddress()->getCountry()->getLongName();
+	}
+
+}
+
+if($firstResult->hasGeometry()) {
+
+	// Retrieving the geometry information from the lookup result
+
+	if($firstResult->getGeometry()->hasLocation()) {
+		// Returns 54.334123
+		$geometryLocationLatitude = $firstResult->getGeometry()->getLocation()->getLatitude();
+		// Returns 10.1364007
+		$geometryLocationLatitude = $firstResult->getGeometry()->getLocation()->getLongitude();
+	}
+
+	if($firstResult->getGeometry()->hasViewport()) {
+		// Returns 54.335471980291
+		$geometryLocationLatitude = $firstResult->getGeometry()->getViewport()->getNortheast()->getLatitude();
+		// Returns 10.137749680292
+		$geometryLocationLatitude = $firstResult->getGeometry()->getViewport()->getNortheast()->getLongitude();
+		// Returns 54.332774019708
+		$geometryLocationLatitude = $firstResult->getGeometry()->getViewport()->getSouthwest()->getLatitude();
+		// Returns 10.135051719708
+		$geometryLocationLatitude = $firstResult->getGeometry()->getViewport()->getSouthwest()->getLongitude();
+	}
+
+}
+
+if($firstResult->hasGooglePlacesId()) {
+	// Retrieving the Google Places information from the lookup result
+	// Returns 'ChIJ_zNzWmpWskcRP8DWT5eX5jQ'
+	$googlePlacesId = $firstResult->getGooglePlacesId();
+}
 ```
 
 ## Contribution
