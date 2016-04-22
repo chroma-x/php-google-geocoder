@@ -22,6 +22,7 @@ class AddressLookupTest extends \PHPUnit_Framework_TestCase
 		$this->assertInstanceOf('GoogleGeocode\\GeoLookupResult', $firstResult);
 
 		// Address result
+		$this->assertTrue($firstResult->hasAddress());
 		$addressResult = $firstResult->getAddress();
 		$this->assertTrue($addressResult->hasStreetNumber());
 		$this->assertEquals('43', $addressResult->getStreetNumber()->getShortName());
@@ -46,11 +47,14 @@ class AddressLookupTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals('Germany', $addressResult->getCountry()->getLongName());
 
 		// Geometry result
+		$this->assertTrue($firstResult->hasGeometry());
 		$geometryResult = $firstResult->getGeometry();
+		$this->assertTrue($geometryResult->hasLocation());
 		$this->assertGreaterThanOrEqual(54.3, $geometryResult->getLocation()->getLatitude());
 		$this->assertLessThanOrEqual(54.4, $geometryResult->getLocation()->getLatitude());
 		$this->assertGreaterThanOrEqual(10.1, $geometryResult->getLocation()->getLongitude());
 		$this->assertLessThanOrEqual(10.2, $geometryResult->getLocation()->getLongitude());
+		$this->assertTrue($geometryResult->hasViewport());
 		$this->assertGreaterThanOrEqual(54.3, $geometryResult->getViewport()->getNortheast()->getLatitude());
 		$this->assertLessThanOrEqual(54.4, $geometryResult->getViewport()->getNortheast()->getLatitude());
 		$this->assertGreaterThanOrEqual(10.1, $geometryResult->getViewport()->getNortheast()->getLongitude());
@@ -61,6 +65,7 @@ class AddressLookupTest extends \PHPUnit_Framework_TestCase
 		$this->assertLessThanOrEqual(10.2, $geometryResult->getViewport()->getSouthwest()->getLongitude());
 
 		// Google Places ID
+		$this->assertTrue($firstResult->hasGooglePlacesId());
 		$this->assertEquals('ChIJ_zNzWmpWskcRP8DWT5eX5jQ', $firstResult->getGooglePlacesId());
 	}
 
