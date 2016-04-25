@@ -7,7 +7,7 @@
 [![Total Downloads](https://poser.pugx.org/markenwerk/google-geocoder/downloads)](https://packagist.org/packages/markenwerk/google-geocoder)
 [![License](https://poser.pugx.org/markenwerk/google-geocoder/license)](https://packagist.org/packages/markenwerk/google-geocoder)
 
-A PHP library to query Google's location service for geolocation lookup based on a given address, a geo location or a Google Places ID.
+A PHP library to query Google's location service for geolocation and reverse lookups based on a given address, a geo location or a Google Places ID.
 
 ## Installation
 
