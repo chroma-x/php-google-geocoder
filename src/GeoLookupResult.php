@@ -2,6 +2,8 @@
 
 namespace GoogleGeocode;
 
+use GoogleDataStructure\GeoLocation;
+
 /**
  * Class AddressLookupResult
  *
@@ -32,8 +34,11 @@ class GeoLookupResult
 	 * @param GeoLocation\GeoLocationGeometry $geometry
 	 * @param string $googlePlacesId
 	 */
-	public function __construct(GeoLocation\GeoLocationAddress $address, GeoLocation\GeoLocationGeometry $geometry, $googlePlacesId)
-	{
+	public function __construct(
+		GeoLocation\GeoLocationAddress $address,
+		GeoLocation\GeoLocationGeometry $geometry,
+		$googlePlacesId
+	) {
 		$this->address = $address;
 		$this->geometry = $geometry;
 		$this->googlePlacesId = $googlePlacesId;

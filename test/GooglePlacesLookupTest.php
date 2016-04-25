@@ -80,6 +80,7 @@ class GooglePlacesLookupTest extends \PHPUnit_Framework_TestCase
 		$this->assertLessThanOrEqual(54.4, $geometryResult->getViewport()->getSouthwest()->getLatitude());
 		$this->assertGreaterThanOrEqual(10.1, $geometryResult->getViewport()->getSouthwest()->getLongitude());
 		$this->assertLessThanOrEqual(10.2, $geometryResult->getViewport()->getSouthwest()->getLongitude());
+		$this->assertFalse($geometryResult->hasAccessPoints());
 
 		// Google Places ID
 		$this->assertTrue($firstResult->hasGooglePlacesId());

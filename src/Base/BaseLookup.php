@@ -3,6 +3,7 @@
 namespace GoogleGeocode\Base;
 
 use GoogleGeocode;
+use GoogleDataStructure;
 
 /**
  * Class BaseLookup
@@ -139,8 +140,10 @@ abstract class BaseLookup
 			$address = $responseData['results'][$i]['address_components'];
 			$geometry = $responseData['results'][$i]['geometry'];
 			$placesId = $responseData['results'][$i]['place_id'];
-			$locationAddress = new GoogleGeocode\GeoLocation\GeoLocationAddress($address);
-			$locationGeometry = new GoogleGeocode\GeoLocation\GeoLocationGeometry($geometry);
+			$locationAddress = new GoogleDataStructure\GeoLocation\GeoLocationAddress();
+			$locationAddress->setFromServiceResult($address);
+			$locationGeometry = new GoogleDataStructure\GeoLocation\GeoLocationGeometry();
+			$locationGeometry->setFromServiceResult($geometry);
 			$this->addResult(new GoogleGeocode\GeoLookupResult($locationAddress, $locationGeometry, $placesId));
 		}
 		return $this;
