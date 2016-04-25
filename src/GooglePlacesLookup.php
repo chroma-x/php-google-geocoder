@@ -2,6 +2,8 @@
 
 namespace GoogleGeocode;
 
+use CommonException;
+
 /**
  * Class GooglePlacesLookup
  *
@@ -13,10 +15,10 @@ class GooglePlacesLookup extends Base\BaseApiKeyGatedLookup
 	/**
 	 * @param string $googlePlacesId
 	 * @return $this
-	 * @throws Exception\ApiException
-	 * @throws Exception\ApiLimitException
-	 * @throws Exception\ApiNoResultsException
-	 * @throws Exception\NetworkException
+	 * @throws CommonException\ApiException\ApiException
+	 * @throws CommonException\ApiException\ApiLimitException
+	 * @throws CommonException\ApiException\ApiNoResultsException
+	 * @throws CommonException\ApiException\NetworkException
 	 */
 	public function lookup($googlePlacesId)
 	{

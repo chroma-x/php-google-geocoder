@@ -2,6 +2,8 @@
 
 namespace GoogleGeocode;
 
+use CommonException;
+
 /**
  * Class GeoLocationLookupTest
  *
@@ -72,7 +74,7 @@ class GeoLocationLookupTest extends \PHPUnit_Framework_TestCase
 
 	public function testLookupFailure()
 	{
-		$this->setExpectedException(get_class(new Exception\ApiNoResultsException()));
+		$this->setExpectedException(get_class(new CommonException\ApiException\ApiNoResultsException()));
 		$geoLocationLookup = new GeoLocationLookup();
 		$geoLocationLookup->lookup(1000000, 1000000);
 	}

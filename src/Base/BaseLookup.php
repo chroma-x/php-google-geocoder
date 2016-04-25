@@ -2,6 +2,7 @@
 
 namespace GoogleGeocode\Base;
 
+use CommonException;
 use GoogleGeocode;
 use GoogleDataStructure;
 
@@ -71,10 +72,10 @@ abstract class BaseLookup
 	 *
 	 * @param string
 	 * @return string
-	 * @throws GoogleGeocode\Exception\ApiException
-	 * @throws GoogleGeocode\Exception\ApiLimitException
-	 * @throws GoogleGeocode\Exception\ApiNoResultsException
-	 * @throws GoogleGeocode\Exception\NetworkException
+	 * @throws CommonException\ApiException\ApiException
+	 * @throws CommonException\ApiException\ApiLimitException
+	 * @throws CommonException\ApiException\ApiNoResultsException
+	 * @throws CommonException\ApiException\NetworkException
 	 */
 	protected function request($url)
 	{
@@ -84,7 +85,7 @@ abstract class BaseLookup
 		$response = curl_exec($curl);
 		curl_close($curl);
 		if (!$response) {
-			throw new GoogleGeocode\Exception\NetworkException('Curling the API endpoint ' . $url . ' failed.');
+			throw new CommonException\ApiException\NetworkException('Curling the API endpoint ' . $url . ' failed.');
 		}
 		$responseData = @json_decode($response, true);
 		$this->validateResponse($response, $responseData);
@@ -94,26 +95,26 @@ abstract class BaseLookup
 	/**
 	 * @param string $rawResponse
 	 * @param array|string $responseData
-	 * @throws GoogleGeocode\Exception\ApiException
-	 * @throws GoogleGeocode\Exception\ApiLimitException
-	 * @throws GoogleGeocode\Exception\ApiNoResultsException
+	 * @throws CommonException\ApiException\ApiException
+	 * @throws CommonException\ApiException\ApiLimitException
+	 * @throws CommonException\ApiException\ApiNoResultsException
 	 */
 	private function validateResponse($rawResponse, $responseData)
 	{
 		if (is_null($responseData) || !is_array($responseData) || !isset($responseData['status'])) {
-			throw new GoogleGeocode\Exception\ApiException('Parsing the API response from body failed: ' . $rawResponse);
+			throw new CommonException\ApiException\ApiException('Parsing the API response from body failed: ' . $rawResponse);
 		}
 
 		$responseStatus = mb_strtoupper($responseData['status']);
 		if ($responseStatus == 'OVER_QUERY_LIMIT') {
 			$exceptionMessage = $this->buildExceptionMessage('Google Geocoder request limit reached', $responseData);
-			throw new GoogleGeocode\Exception\ApiLimitException($exceptionMessage);
+			throw new CommonException\ApiException\ApiLimitException($exceptionMessage);
 		} else if ($responseStatus == 'REQUEST_DENIED') {
 			$exceptionMessage = $this->buildExceptionMessage('Google Geocoder request was denied', $responseData);
-			throw new GoogleGeocode\Exception\ApiException($exceptionMessage);
+			throw new CommonException\ApiException\ApiException($exceptionMessage);
 		} else if ($responseStatus != 'OK') {
 			$exceptionMessage = $this->buildExceptionMessage('Google Geocoder no results', $responseData);
-			throw new GoogleGeocode\Exception\ApiNoResultsException($exceptionMessage);
+			throw new CommonException\ApiException\ApiNoResultsException($exceptionMessage);
 		}
 	}
 

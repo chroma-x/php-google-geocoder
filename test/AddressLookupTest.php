@@ -2,6 +2,8 @@
 
 namespace GoogleGeocode;
 
+use CommonException;
+
 /**
  * Class AddressLookupTest
  *
@@ -20,7 +22,7 @@ class AddressLookupTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals(1, $addressLookup->getResultCount());
 		$firstResult = $addressLookup->getFirstResult();
 		$this->assertInstanceOf('GoogleGeocode\\GeoLookupResult', $firstResult);
-		print_r($firstResult);
+
 		// Address result
 		$this->assertTrue($firstResult->hasAddress());
 		$addressResult = $firstResult->getAddress();
@@ -72,7 +74,7 @@ class AddressLookupTest extends \PHPUnit_Framework_TestCase
 
 	public function testLookupFailure()
 	{
-		$this->setExpectedException(get_class(new Exception\ApiNoResultsException()));
+		$this->setExpectedException(get_class(new CommonException\ApiException\ApiNoResultsException()));
 		$addressLookup = new AddressLookup();
 		$addressLookup->lookup('China, Bejing, Lornsenstraße 43');
 	}

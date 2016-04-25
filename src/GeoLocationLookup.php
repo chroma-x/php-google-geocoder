@@ -2,6 +2,8 @@
 
 namespace GoogleGeocode;
 
+use CommonException;
+
 /**
  * Class GeoLocationLookup
  *
@@ -14,10 +16,10 @@ class GeoLocationLookup extends Base\BaseLookup
 	 * @param float $latitude
 	 * @param float $longitude
 	 * @return $this
-	 * @throws Exception\ApiException
-	 * @throws Exception\ApiLimitException
-	 * @throws Exception\ApiNoResultsException
-	 * @throws Exception\NetworkException
+	 * @throws CommonException\ApiException\ApiException
+	 * @throws CommonException\ApiException\ApiLimitException
+	 * @throws CommonException\ApiException\ApiNoResultsException
+	 * @throws CommonException\ApiException\NetworkException
 	 */
 	public function lookup($latitude, $longitude)
 	{
