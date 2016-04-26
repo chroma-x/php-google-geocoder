@@ -29,5 +29,8 @@
   "require-dev":{
     "phpunit/phpunit": "~4.8",
     "codeclimate/php-test-reporter": "dev-master"
+  },
+  "suggest": {
+    "markenwerk/google-places-suite": "A PHP library to query Google's Places service for querying locations and addresses and getting details by Places ID."
   }
 }
