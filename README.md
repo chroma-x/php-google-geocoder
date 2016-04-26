@@ -14,7 +14,7 @@ A PHP library to query Google's location service for geolocation and reverse loo
 ```{json}
 {
    	"require": {
-        "markenwerk/google-geocoder": "~1.0"
+        "markenwerk/google-geocoder": "~2.0"
     }
 }
 ```
