@@ -91,7 +91,7 @@ class GooglePlacesLookupTest extends \PHPUnit_Framework_TestCase
 
 	public function testLookupNoResults()
 	{
-		$this->setExpectedException(get_class(new CommonException\ApiException\ApiNoResultsException()));
+		$this->setExpectedException(get_class(new CommonException\ApiException\NoResultException()));
 		$googlePlacesLookup = new GooglePlacesLookup();
 		$googlePlacesLookup
 			->setApiKey($this->googlePlacesApiKey)
@@ -100,7 +100,7 @@ class GooglePlacesLookupTest extends \PHPUnit_Framework_TestCase
 
 	public function testLookupApiKey()
 	{
-		$this->setExpectedException(get_class(new CommonException\ApiException\ApiException()));
+		$this->setExpectedException(get_class(new CommonException\ApiException\AuthenticationException()));
 		$googlePlacesLookup = new GooglePlacesLookup();
 		$googlePlacesLookup
 			->setApiKey('INVALID_API_KEY')

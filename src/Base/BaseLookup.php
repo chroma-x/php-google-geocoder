@@ -72,10 +72,11 @@ abstract class BaseLookup
 	 *
 	 * @param string
 	 * @return string
-	 * @throws CommonException\ApiException\ApiException
-	 * @throws CommonException\ApiException\ApiLimitException
-	 * @throws CommonException\ApiException\ApiNoResultsException
-	 * @throws CommonException\ApiException\NetworkException
+	 * @throws CommonException\ApiException\AuthenticationException
+	 * @throws CommonException\ApiException\InvalidResponseException
+	 * @throws CommonException\ApiException\NoResultException
+	 * @throws CommonException\ApiException\RequestQuotaException
+	 * @throws CommonException\NetworkException\CurlException
 	 */
 	protected function request($url)
 	{
@@ -85,7 +86,7 @@ abstract class BaseLookup
 		$response = curl_exec($curl);
 		curl_close($curl);
 		if (!$response) {
-			throw new CommonException\ApiException\NetworkException('Curling the API endpoint ' . $url . ' failed.');
+			throw new CommonException\NetworkException\CurlException('Curling the API endpoint ' . $url . ' failed.');
 		}
 		$responseData = @json_decode($response, true);
 		$this->validateResponse($response, $responseData);
@@ -95,26 +96,27 @@ abstract class BaseLookup
 	/**
 	 * @param string $rawResponse
 	 * @param array|string $responseData
-	 * @throws CommonException\ApiException\ApiException
-	 * @throws CommonException\ApiException\ApiLimitException
-	 * @throws CommonException\ApiException\ApiNoResultsException
+	 * @throws CommonException\ApiException\AuthenticationException
+	 * @throws CommonException\ApiException\InvalidResponseException
+	 * @throws CommonException\ApiException\NoResultException
+	 * @throws CommonException\ApiException\RequestQuotaException
 	 */
 	private function validateResponse($rawResponse, $responseData)
 	{
 		if (is_null($responseData) || !is_array($responseData) || !isset($responseData['status'])) {
-			throw new CommonException\ApiException\ApiException('Parsing the API response from body failed: ' . $rawResponse);
+			throw new CommonException\ApiException\InvalidResponseException('Parsing the API response from body failed: ' . $rawResponse);
 		}
 
 		$responseStatus = mb_strtoupper($responseData['status']);
 		if ($responseStatus == 'OVER_QUERY_LIMIT') {
 			$exceptionMessage = $this->buildExceptionMessage('Google Geocoder request limit reached', $responseData);
-			throw new CommonException\ApiException\ApiLimitException($exceptionMessage);
+			throw new CommonException\ApiException\RequestQuotaException($exceptionMessage);
 		} else if ($responseStatus == 'REQUEST_DENIED') {
 			$exceptionMessage = $this->buildExceptionMessage('Google Geocoder request was denied', $responseData);
-			throw new CommonException\ApiException\ApiException($exceptionMessage);
+			throw new CommonException\ApiException\AuthenticationException($exceptionMessage);
 		} else if ($responseStatus != 'OK') {
 			$exceptionMessage = $this->buildExceptionMessage('Google Geocoder no results', $responseData);
-			throw new CommonException\ApiException\ApiNoResultsException($exceptionMessage);
+			throw new CommonException\ApiException\NoResultException($exceptionMessage);
 		}
 	}
 

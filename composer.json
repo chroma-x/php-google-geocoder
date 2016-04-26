@@ -23,8 +23,8 @@
   },
   "require": {
     "php": ">=5.3",
-    "markenwerk/common-exceptions": "*",
-    "markenwerk/google-datastructures": "*"
+    "markenwerk/common-exceptions": "~2.0",
+    "markenwerk/google-datastructures": "~1.0"
   },
   "require-dev":{
     "phpunit/phpunit": "~4.8",

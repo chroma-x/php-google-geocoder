@@ -74,7 +74,7 @@ class GeoLocationLookupTest extends \PHPUnit_Framework_TestCase
 
 	public function testLookupFailure()
 	{
-		$this->setExpectedException(get_class(new CommonException\ApiException\ApiNoResultsException()));
+		$this->setExpectedException(get_class(new CommonException\ApiException\NoResultException()));
 		$geoLocationLookup = new GeoLocationLookup();
 		$geoLocationLookup->lookup(1000000, 1000000);
 	}

@@ -74,7 +74,7 @@ class AddressLookupTest extends \PHPUnit_Framework_TestCase
 
 	public function testLookupFailure()
 	{
-		$this->setExpectedException(get_class(new CommonException\ApiException\ApiNoResultsException()));
+		$this->setExpectedException(get_class(new CommonException\ApiException\NoResultException()));
 		$addressLookup = new AddressLookup();
 		$addressLookup->lookup('China, Bejing, Lornsenstraße 43');
 	}

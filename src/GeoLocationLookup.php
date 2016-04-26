@@ -16,10 +16,11 @@ class GeoLocationLookup extends Base\BaseLookup
 	 * @param float $latitude
 	 * @param float $longitude
 	 * @return $this
-	 * @throws CommonException\ApiException\ApiException
-	 * @throws CommonException\ApiException\ApiLimitException
-	 * @throws CommonException\ApiException\ApiNoResultsException
-	 * @throws CommonException\ApiException\NetworkException
+	 * @throws CommonException\ApiException\AuthenticationException
+	 * @throws CommonException\ApiException\InvalidResponseException
+	 * @throws CommonException\ApiException\NoResultException
+	 * @throws CommonException\ApiException\RequestQuotaException
+	 * @throws CommonException\NetworkException\CurlException
 	 */
 	public function lookup($latitude, $longitude)
 	{
