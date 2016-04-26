@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/markenwerk/php-google-geocoder.svg?branch=master)](https://travis-ci.org/markenwerk/php-google-geocoder)
 [![Test Coverage](https://codeclimate.com/github/markenwerk/php-google-geocoder/badges/coverage.svg)](https://codeclimate.com/github/markenwerk/php-google-geocoder/coverage)
+[![Dependency Status](https://www.versioneye.com/user/projects/571f7841fcd19a004544233f/badge.svg)](https://www.versioneye.com/user/projects/571f7841fcd19a004544233f)
 [![Code Climate](https://codeclimate.com/github/markenwerk/php-google-geocoder/badges/gpa.svg)](https://codeclimate.com/github/markenwerk/php-google-geocoder)
 [![Latest Stable Version](https://poser.pugx.org/markenwerk/google-geocoder/v/stable)](https://packagist.org/packages/markenwerk/google-geocoder)
 [![Total Downloads](https://poser.pugx.org/markenwerk/google-geocoder/downloads)](https://packagist.org/packages/markenwerk/google-geocoder)
