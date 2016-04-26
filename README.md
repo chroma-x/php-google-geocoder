@@ -34,6 +34,8 @@ require_once('path/to/vendor/autoload.php');
 #### Resolving an address
 
 ```{php}
+use CommonException;
+
 try{
 	// Perform lookup
 	$addressLookup = new GoogleGeocode\AddressLookup();
@@ -48,13 +50,13 @@ try{
 	// Retrieving the first lookup result as GoogleGeocode\GeoLookupResult instance
 	$firstResult = $addressLookup->getFirstResult();
 
-} catch (GoogleGeocode\Exception\NetworkException $exception) {
+} catch (CommonException\NetworkException\CurlException $exception) {
 	// Google Geocode API is not reachable or curl failed
-} catch (GoogleGeocode\Exception\ApiException $exception) {
+} catch (CommonException\ApiException\InvalidResponseException $exception) {
 	// Google Geocode API unexpected result
-} catch (GoogleGeocode\Exception\ApiLimitException $exception) {
+} catch (CommonException\ApiException\RequestQuotaException $exception) {
 	// Google Geocode API requests over the allowed limit
-} catch (GoogleGeocode\Exception\ApiNoResultsException $exception) {
+} catch (CommonException\ApiException\NoResultException $exception) {
 	// Google Geocode API request had no result
 }
 
@@ -63,6 +65,8 @@ try{
 #### Resolving a geo location
 
 ```{php}
+use CommonException;
+
 try{
 	// Perform lookup
 	$geoLocationLookup = new GoogleGeocode\GeoLocationLookup();
@@ -77,13 +81,13 @@ try{
 	// Retrieving the first lookup result as GoogleGeocode\AddressLookupResult instance
 	$firstResult = $geoLocationLookup->getFirstResult();
 
-} catch (GoogleGeocode\Exception\NetworkException $exception) {
+} catch (CommonException\NetworkException\CurlException $exception) {
 	// Google Geocode API is not reachable or curl failed
-} catch (GoogleGeocode\Exception\ApiException $exception) {
+} catch (CommonException\ApiException\InvalidResponseException $exception) {
 	// Google Geocode API unexpected result
-} catch (GoogleGeocode\Exception\ApiLimitException $exception) {
+} catch (CommonException\ApiException\RequestQuotaException $exception) {
 	// Google Geocode API requests over the allowed limit
-} catch (GoogleGeocode\Exception\ApiNoResultsException $exception) {
+} catch (CommonException\ApiException\NoResultException $exception) {
 	// Google Geocode API request had no result
 }
 
@@ -94,6 +98,8 @@ try{
 Resolving Google Places IDs utilizes the Google Places API. Therefore a Places API key is mandatory for performing a lookup. Please visit the [Google API console](https://console.developers.google.com/apis/api/geocoding_backend?project=_) to receive an API key.
 
 ```{php}
+use CommonException;
+
 try{
 	// Perform lookup
 	$googlePlacesLookup = new GoogleGeocode\GooglePlacesLookup();
@@ -110,13 +116,15 @@ try{
 	// Retrieving the first lookup result as GoogleGeocode\AddressLookupResult instance
 	$firstResult = $googlePlacesLookup->getFirstResult();
 
-} catch (GoogleGeocode\Exception\NetworkException $exception) {
+} catch (CommonException\NetworkException\CurlException $exception) {
 	// Google Geocode API is not reachable or curl failed
-} catch (GoogleGeocode\Exception\ApiException $exception) {
+} catch (CommonException\ApiException\InvalidResponseException $exception) {
 	// Google Geocode API unexpected result
-} catch (GoogleGeocode\Exception\ApiLimitException $exception) {
+} catch (CommonException\ApiException\RequestQuotaException $exception) {
 	// Google Geocode API requests over the allowed limit
-} catch (GoogleGeocode\Exception\ApiNoResultsException $exception) {
+} catch (CommonException\ApiException\AuthenticationException $exception) {
+	// Google Places service API key invalid
+} catch (CommonException\ApiException\NoResultException $exception) {
 	// Google Geocode API request had no result
 }
 
@@ -220,6 +228,11 @@ if($firstResult->hasGooglePlacesId()) {
 	$googlePlacesId = $firstResult->getGooglePlacesId();
 }
 ```
+
+## Exception handling
+
+PHP Google Geocoder provides different exceptions provided by the PHP Common Exceptions project for proper handling.  
+You can find more information about [PHP Common Exceptions at Github](https://github.com/markenwerk/php-common-exceptions).
 
 ## Contribution
 
