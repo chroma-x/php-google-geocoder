@@ -15,7 +15,7 @@ A PHP library to query Google's location service for geolocation and reverse loo
 ```{json}
 {
    	"require": {
-        "markenwerk/google-geocoder": "~2.0"
+        "markenwerk/google-geocoder": "~3.0"
     }
 }
 ```
@@ -35,20 +35,20 @@ require_once('path/to/vendor/autoload.php');
 #### Resolving an address
 
 ```{php}
-use CommonException;
+use Markenwerk\CommonException;
 
 try{
 	// Perform lookup
-	$addressLookup = new GoogleGeocode\AddressLookup();
+	$addressLookup = new Markenwerk\GoogleGeocode\Lookup\AddressLookup();
 	$addressLookup->lookup('Germany, 24105 Kiel, Lornsenstraße 43');
 
-	// Retrieving the lookup as an array of GoogleGeocode\GeoLookupResult instances
+	// Retrieving the lookup as an array of Markenwerk\GoogleGeocode\Result\GeoLookupResult instances
 	$lookupResults = $addressLookup->getResults();
 
 	// Get the number of lookup results
 	$lookupResultCount = $addressLookup->getResultCount();
 
-	// Retrieving the first lookup result as GoogleGeocode\GeoLookupResult instance
+	// Retrieving the first lookup result as Markenwerk\GoogleGeocode\Result\GeoLookupResult instance
 	$firstResult = $addressLookup->getFirstResult();
 
 } catch (CommonException\NetworkException\CurlException $exception) {
@@ -66,20 +66,20 @@ try{
 #### Resolving a geo location
 
 ```{php}
-use CommonException;
+use Markenwerk\CommonException;
 
 try{
 	// Perform lookup
-	$geoLocationLookup = new GoogleGeocode\GeoLocationLookup();
+	$geoLocationLookup = new Markenwerk\GoogleGeocode\Lookup\GeoLocationLookup();
 	$geoLocationLookup->lookup(54.334123, 10.1364007);
 
-	// Retrieving the lookup as an array of GoogleGeocode\GeoLookupResult instances
+	// Retrieving the lookup as an array of Markenwerk\GoogleGeocode\Result\GeoLookupResult instances
 	$lookupResults = $geoLocationLookup->getResults();
 
 	// Get the number of lookup results
 	$lookupResultCount = $geoLocationLookup->getResultCount();
 
-	// Retrieving the first lookup result as GoogleGeocode\AddressLookupResult instance
+	// Retrieving the first lookup result as Markenwerk\GoogleGeocode\Result\AddressLookupResult instance
 	$firstResult = $geoLocationLookup->getFirstResult();
 
 } catch (CommonException\NetworkException\CurlException $exception) {
@@ -99,22 +99,22 @@ try{
 Resolving Google Places IDs utilizes the Google Places API. Therefore a Places API key is mandatory for performing a lookup. Please visit the [Google API console](https://console.developers.google.com/apis/api/geocoding_backend?project=_) to receive an API key.
 
 ```{php}
-use CommonException;
+use Markenwerk\CommonException;
 
 try{
 	// Perform lookup
-	$googlePlacesLookup = new GoogleGeocode\GooglePlacesLookup();
+	$googlePlacesLookup = new GoogleGeocode\Lookup\GooglePlacesLookup();
 	$googlePlacesLookup
 		->setApiKey('MY_GOOGLE_PLACES_API_KEY')
 		->lookup('ChIJ_zNzWmpWskcRP8DWT5eX5jQ');
 
-	// Retrieving the lookup as an array of GoogleGeocode\GeoLookupResult instances
+	// Retrieving the lookup as an array of Markenwerk\GoogleGeocode\Result\GeoLookupResult instances
 	$lookupResults = $googlePlacesLookup->getResults();
 
 	// Get the number of lookup results
 	$lookupResultCount = $googlePlacesLookup->getResultCount();
 
-	// Retrieving the first lookup result as GoogleGeocode\AddressLookupResult instance
+	// Retrieving the first lookup result as Markenwerk\GoogleGeocode\Result\AddressLookupResult instance
 	$firstResult = $googlePlacesLookup->getFirstResult();
 
 } catch (CommonException\NetworkException\CurlException $exception) {
@@ -138,10 +138,10 @@ try{
 **Attention:** Plaese note that all getter methods on the `GeoLocationAddress` return a `GeoLocationAddressComponent` instance or `null`. For preventing calls on non-objects the `GeoLocationAddress` class provides methods to check whether the address components exists. 
 
 ```{php}
-// Retrieving the first lookup result as GoogleGeocode\GeoLookupResult instance
+// Retrieving the first lookup result as Markenwerk\GoogleGeocode\Result\GeoLookupResult instance
 $firstResult = $addressLookup->getFirstResult();
 
-// Retieving address information as GoogleGeocode\GeoLocation\GeoLocationAddress
+// Retieving address information as Markenwerk\GoogleGeocode\GeoLocation\GeoLocationAddress
 $geoLocationAddress = $firstResult->getAddress();
 
 if($firstResult->hasAddress()) {

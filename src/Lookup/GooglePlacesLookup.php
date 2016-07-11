@@ -1,19 +1,19 @@
 <?php
 
-namespace GoogleGeocode;
+namespace Markenwerk\GoogleGeocode\Lookup;
 
-use CommonException;
+use Markenwerk\CommonException;
 
 /**
- * Class AddressLookup
+ * Class GooglePlacesLookup
  *
- * @package GoogleGeocode
+ * @package Markenwerk\GoogleGeocode\Lookup
  */
-class AddressLookup extends Base\BaseLookup
+class GooglePlacesLookup extends AbstractApiKeyGatedLookup
 {
 
 	/**
-	 * @param string $address
+	 * @param string $googlePlacesId
 	 * @return $this
 	 * @throws CommonException\ApiException\AuthenticationException
 	 * @throws CommonException\ApiException\InvalidResponseException
@@ -21,9 +21,10 @@ class AddressLookup extends Base\BaseLookup
 	 * @throws CommonException\ApiException\RequestQuotaException
 	 * @throws CommonException\NetworkException\CurlException
 	 */
-	public function lookup($address)
+	public function lookup($googlePlacesId)
 	{
-		$requestUrl = self::API_BASE_URL . $this->encodeUrlParameter($address);
+		$requestUrl = self::API_BASE_URL . $this->encodeUrlParameter($googlePlacesId);
+		$requestUrl = $this->addApiKey($requestUrl);
 		$responseData = $this->request($requestUrl);
 		$this
 			->clearResults()
@@ -37,7 +38,7 @@ class AddressLookup extends Base\BaseLookup
 	 */
 	protected function encodeUrlParameter($urlParameter)
 	{
-		return '&address=' . parent::encodeUrlParameter($urlParameter);
+		return '&place_id=' . parent::encodeUrlParameter($urlParameter);
 	}
 
 }

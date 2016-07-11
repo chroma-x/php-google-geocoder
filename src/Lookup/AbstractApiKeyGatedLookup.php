@@ -1,15 +1,15 @@
 <?php
 
-namespace GoogleGeocode\Base;
+namespace Markenwerk\GoogleGeocode\Lookup;
 
-use GoogleGeocode;
+use Markenwerk\GoogleGeocode;
 
 /**
- * Class BaseApiKeyGatedLookup
+ * Class AbstractApiKeyGatedLookup
  *
- * @package GoogleGeocode\Base
+ * @package Markenwerk\GoogleGeocode\Lookup
  */
-abstract class BaseApiKeyGatedLookup extends BaseLookup
+abstract class AbstractApiKeyGatedLookup extends AbstractLookup
 {
 
 	/**

@@ -1,13 +1,13 @@
 <?php
 
-namespace GoogleGeocode;
+namespace Markenwerk\GoogleGeocode\Result;
 
-use GoogleDataStructure\GeoLocation;
+use Markenwerk\GoogleDataStructure\GeoLocation;
 
 /**
- * Class AddressLookupResult
+ * Class GeoLookupResult
  *
- * @package GoogleGeocode
+ * @package Markenwerk\GoogleGeocode\Result
  */
 class GeoLookupResult
 {

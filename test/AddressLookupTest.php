@@ -1,13 +1,13 @@
 <?php
 
-namespace GoogleGeocode;
+namespace Markenwerk\GoogleGeocode\Lookup;
 
-use CommonException;
+use Markenwerk\CommonException;
 
 /**
  * Class AddressLookupTest
  *
- * @package GoogleGeocode
+ * @package Markenwerk\GoogleGeocode
  */
 class AddressLookupTest extends \PHPUnit_Framework_TestCase
 {
@@ -21,7 +21,7 @@ class AddressLookupTest extends \PHPUnit_Framework_TestCase
 		// Validate results
 		$this->assertEquals(1, $addressLookup->getResultCount());
 		$firstResult = $addressLookup->getFirstResult();
-		$this->assertInstanceOf('GoogleGeocode\\GeoLookupResult', $firstResult);
+		$this->assertInstanceOf('Markenwerk\\GoogleGeocode\\Result\\GeoLookupResult', $firstResult);
 
 		// Address result
 		$this->assertTrue($firstResult->hasAddress());

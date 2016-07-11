@@ -1,20 +1,19 @@
 <?php
 
-namespace GoogleGeocode;
+namespace Markenwerk\GoogleGeocode\Lookup;
 
-use CommonException;
+use Markenwerk\CommonException;
 
 /**
- * Class GeoLocationLookup
+ * Class AddressLookup
  *
- * @package GoogleGeocode
+ * @package Markenwerk\GoogleGeocode\Lookup
  */
-class GeoLocationLookup extends Base\BaseLookup
+class AddressLookup extends AbstractLookup
 {
 
 	/**
-	 * @param float $latitude
-	 * @param float $longitude
+	 * @param string $address
 	 * @return $this
 	 * @throws CommonException\ApiException\AuthenticationException
 	 * @throws CommonException\ApiException\InvalidResponseException
@@ -22,9 +21,9 @@ class GeoLocationLookup extends Base\BaseLookup
 	 * @throws CommonException\ApiException\RequestQuotaException
 	 * @throws CommonException\NetworkException\CurlException
 	 */
-	public function lookup($latitude, $longitude)
+	public function lookup($address)
 	{
-		$requestUrl = self::API_BASE_URL . $this->encodeUrlParameter($latitude . ',' . $longitude);
+		$requestUrl = self::API_BASE_URL . $this->encodeUrlParameter($address);
 		$responseData = $this->request($requestUrl);
 		$this
 			->clearResults()
@@ -38,7 +37,7 @@ class GeoLocationLookup extends Base\BaseLookup
 	 */
 	protected function encodeUrlParameter($urlParameter)
 	{
-		return '&latlng=' . parent::encodeUrlParameter($urlParameter);
+		return '&address=' . parent::encodeUrlParameter($urlParameter);
 	}
 
 }

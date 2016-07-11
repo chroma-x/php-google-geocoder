@@ -1,31 +1,31 @@
 <?php
 
-namespace GoogleGeocode\Base;
+namespace Markenwerk\GoogleGeocode\Lookup;
 
-use CommonException;
-use GoogleGeocode;
-use GoogleDataStructure;
+use Markenwerk\CommonException;
+use Markenwerk\GoogleGeocode;
+use Markenwerk\GoogleDataStructure;
 
 /**
- * Class BaseLookup
+ * Class AbstractLookup
  *
- * @package GoogleGeocode\Base
+ * @package Markenwerk\GoogleGeocode\Lookup
  */
-abstract class BaseLookup
+abstract class AbstractLookup
 {
 
 	const API_BASE_URL = 'https://maps.google.com/maps/api/geocode/json?sensor=false';
 
 	/**
-	 * @var GoogleGeocode\GeoLookupResult[]
+	 * @var GoogleGeocode\Result\GeoLookupResult[]
 	 */
 	private $results = array();
 
 	/**
-	 * @param GoogleGeocode\GeoLookupResult $result
+	 * @param GoogleGeocode\Result\GeoLookupResult $result
 	 * @return $this
 	 */
-	protected function addResult(GoogleGeocode\GeoLookupResult $result)
+	protected function addResult(GoogleGeocode\Result\GeoLookupResult $result)
 	{
 		$this->results[] = $result;
 		return $this;
@@ -41,7 +41,7 @@ abstract class BaseLookup
 	}
 
 	/**
-	 * @return GoogleGeocode\GeoLookupResult[]
+	 * @return GoogleGeocode\Result\GeoLookupResult[]
 	 */
 	public function getResults()
 	{
@@ -57,7 +57,7 @@ abstract class BaseLookup
 	}
 
 	/**
-	 * @return GoogleGeocode\GeoLookupResult
+	 * @return GoogleGeocode\Result\GeoLookupResult
 	 */
 	public function getFirstResult()
 	{
@@ -147,7 +147,7 @@ abstract class BaseLookup
 			$locationAddress->setFromServiceResult($address);
 			$locationGeometry = new GoogleDataStructure\GeoLocation\GeoLocationGeometry();
 			$locationGeometry->setFromServiceResult($geometry);
-			$this->addResult(new GoogleGeocode\GeoLookupResult($locationAddress, $locationGeometry, $placesId));
+			$this->addResult(new GoogleGeocode\Result\GeoLookupResult($locationAddress, $locationGeometry, $placesId));
 		}
 		return $this;
 	}
