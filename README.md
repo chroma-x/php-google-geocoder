@@ -103,7 +103,7 @@ use Markenwerk\CommonException;
 
 try{
 	// Perform lookup
-	$googlePlacesLookup = new GoogleGeocode\Lookup\GooglePlacesLookup();
+	$googlePlacesLookup = new Markenwerk\GoogleGeocode\Lookup\GooglePlacesLookup();
 	$googlePlacesLookup
 		->setApiKey('MY_GOOGLE_PLACES_API_KEY')
 		->lookup('ChIJ_zNzWmpWskcRP8DWT5eX5jQ');
