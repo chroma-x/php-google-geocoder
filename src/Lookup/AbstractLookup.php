@@ -88,7 +88,7 @@ abstract class AbstractLookup
 		if (!$response) {
 			throw new CommonException\NetworkException\CurlException('Curling the API endpoint ' . $url . ' failed.');
 		}
-		$responseData = @json_decode($response, true);
+		$responseData = json_decode($response, true);
 		$this->validateResponse($response, $responseData);
 		return $responseData;
 	}
@@ -139,7 +139,8 @@ abstract class AbstractLookup
 	 */
 	protected function addResultsFromResponse($responseData)
 	{
-		for ($i = 0; $i < count($responseData['results']); $i++) {
+		$resultCount = count($responseData['results']);
+		for ($i = 0; $i < $resultCount; $i++) {
 			$address = $responseData['results'][$i]['address_components'];
 			$geometry = $responseData['results'][$i]['geometry'];
 			$placesId = $responseData['results'][$i]['place_id'];
