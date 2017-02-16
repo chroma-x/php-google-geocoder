@@ -9,7 +9,7 @@ use Markenwerk\CommonException;
  *
  * @package Markenwerk\GoogleGeocode\Lookup
  */
-class AddressLookup extends AbstractLookup
+class AddressLookup extends AbstractApiKeyGatedLookup
 {
 
 	/**
@@ -24,6 +24,7 @@ class AddressLookup extends AbstractLookup
 	public function lookup($address)
 	{
 		$requestUrl = self::API_BASE_URL . $this->encodeUrlParameter($address);
+		$requestUrl = $this->addApiKey($requestUrl);
 		$responseData = $this->request($requestUrl);
 		$this
 			->clearResults()
