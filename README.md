@@ -1,12 +1,12 @@
 # PHP Google Geocoder
 
-[![Build Status](https://travis-ci.org/markenwerk/php-google-geocoder.svg?branch=master)](https://travis-ci.org/markenwerk/php-google-geocoder)
-[![Test Coverage](https://codeclimate.com/github/markenwerk/php-google-geocoder/badges/coverage.svg)](https://codeclimate.com/github/markenwerk/php-google-geocoder/coverage)
+[![Build Status](https://travis-ci.org/chroma-x/php-google-geocoder.svg?branch=master)](https://travis-ci.org/chroma-x/php-google-geocoder)
+[![Test Coverage](https://codeclimate.com/github/chroma-x/php-google-geocoder/badges/coverage.svg)](https://codeclimate.com/github/chroma-x/php-google-geocoder/coverage)
 [![Dependency Status](https://www.versioneye.com/user/projects/571f7841fcd19a004544233f/badge.svg)](https://www.versioneye.com/user/projects/571f7841fcd19a004544233f)
-[![Code Climate](https://codeclimate.com/github/markenwerk/php-google-geocoder/badges/gpa.svg)](https://codeclimate.com/github/markenwerk/php-google-geocoder)
-[![Latest Stable Version](https://poser.pugx.org/markenwerk/google-geocoder/v/stable)](https://packagist.org/packages/markenwerk/google-geocoder)
-[![Total Downloads](https://poser.pugx.org/markenwerk/google-geocoder/downloads)](https://packagist.org/packages/markenwerk/google-geocoder)
-[![License](https://poser.pugx.org/markenwerk/google-geocoder/license)](https://packagist.org/packages/markenwerk/google-geocoder)
+[![Code Climate](https://codeclimate.com/github/chroma-x/php-google-geocoder/badges/gpa.svg)](https://codeclimate.com/github/chroma-x/php-google-geocoder)
+[![Latest Stable Version](https://poser.pugx.org/chroma-x/google-geocoder/v/stable)](https://packagist.org/packages/chroma-x/google-geocoder)
+[![Total Downloads](https://poser.pugx.org/chroma-x/google-geocoder/downloads)](https://packagist.org/packages/chroma-x/google-geocoder)
+[![License](https://poser.pugx.org/chroma-x/google-geocoder/license)](https://packagist.org/packages/chroma-x/google-geocoder)
 
 A PHP library to query Google's location service for geolocation and reverse lookups based on a given address, a geo location or a Google Places ID.
 
@@ -15,7 +15,7 @@ A PHP library to query Google's location service for geolocation and reverse loo
 ```{json}
 {
    	"require": {
-        "markenwerk/google-geocoder": "~3.0"
+        "chroma-x/google-geocoder": "~3.0"
     }
 }
 ```
@@ -35,20 +35,20 @@ require_once('path/to/vendor/autoload.php');
 #### Resolving an address
 
 ```{php}
-use Markenwerk\CommonException;
+use ChromaX\CommonException;
 
 try{
 	// Perform lookup
-	$addressLookup = new Markenwerk\GoogleGeocode\Lookup\AddressLookup();
+	$addressLookup = new ChromaX\GoogleGeocode\Lookup\AddressLookup();
 	$addressLookup->lookup('Germany, 24105 Kiel, Lornsenstraße 43');
 
-	// Retrieving the lookup as an array of Markenwerk\GoogleGeocode\Result\GeoLookupResult instances
+	// Retrieving the lookup as an array of ChromaX\GoogleGeocode\Result\GeoLookupResult instances
 	$lookupResults = $addressLookup->getResults();
 
 	// Get the number of lookup results
 	$lookupResultCount = $addressLookup->getResultCount();
 
-	// Retrieving the first lookup result as Markenwerk\GoogleGeocode\Result\GeoLookupResult instance
+	// Retrieving the first lookup result as ChromaX\GoogleGeocode\Result\GeoLookupResult instance
 	$firstResult = $addressLookup->getFirstResult();
 
 } catch (CommonException\NetworkException\CurlException $exception) {
@@ -66,20 +66,20 @@ try{
 #### Resolving a geo location
 
 ```{php}
-use Markenwerk\CommonException;
+use ChromaX\CommonException;
 
 try{
 	// Perform lookup
-	$geoLocationLookup = new Markenwerk\GoogleGeocode\Lookup\GeoLocationLookup();
+	$geoLocationLookup = new ChromaX\GoogleGeocode\Lookup\GeoLocationLookup();
 	$geoLocationLookup->lookup(54.334123, 10.1364007);
 
-	// Retrieving the lookup as an array of Markenwerk\GoogleGeocode\Result\GeoLookupResult instances
+	// Retrieving the lookup as an array of ChromaX\GoogleGeocode\Result\GeoLookupResult instances
 	$lookupResults = $geoLocationLookup->getResults();
 
 	// Get the number of lookup results
 	$lookupResultCount = $geoLocationLookup->getResultCount();
 
-	// Retrieving the first lookup result as Markenwerk\GoogleGeocode\Result\AddressLookupResult instance
+	// Retrieving the first lookup result as ChromaX\GoogleGeocode\Result\AddressLookupResult instance
 	$firstResult = $geoLocationLookup->getFirstResult();
 
 } catch (CommonException\NetworkException\CurlException $exception) {
@@ -99,22 +99,22 @@ try{
 Resolving Google Places IDs utilizes the Google Places API. Therefore a Places API key is mandatory for performing a lookup. Please visit the [Google API console](https://console.developers.google.com/apis/api/geocoding_backend?project=_) to receive an API key.
 
 ```{php}
-use Markenwerk\CommonException;
+use ChromaX\CommonException;
 
 try{
 	// Perform lookup
-	$googlePlacesLookup = new Markenwerk\GoogleGeocode\Lookup\GooglePlacesLookup();
+	$googlePlacesLookup = new ChromaX\GoogleGeocode\Lookup\GooglePlacesLookup();
 	$googlePlacesLookup
 		->setApiKey('MY_GOOGLE_PLACES_API_KEY')
 		->lookup('ChIJ_zNzWmpWskcRP8DWT5eX5jQ');
 
-	// Retrieving the lookup as an array of Markenwerk\GoogleGeocode\Result\GeoLookupResult instances
+	// Retrieving the lookup as an array of ChromaX\GoogleGeocode\Result\GeoLookupResult instances
 	$lookupResults = $googlePlacesLookup->getResults();
 
 	// Get the number of lookup results
 	$lookupResultCount = $googlePlacesLookup->getResultCount();
 
-	// Retrieving the first lookup result as Markenwerk\GoogleGeocode\Result\AddressLookupResult instance
+	// Retrieving the first lookup result as ChromaX\GoogleGeocode\Result\AddressLookupResult instance
 	$firstResult = $googlePlacesLookup->getFirstResult();
 
 } catch (CommonException\NetworkException\CurlException $exception) {
@@ -138,10 +138,10 @@ try{
 **Attention:** Plaese note that all getter methods on the `GeoLocationAddress` return a `GeoLocationAddressComponent` instance or `null`. For preventing calls on non-objects the `GeoLocationAddress` class provides methods to check whether the address components exists. 
 
 ```{php}
-// Retrieving the first lookup result as Markenwerk\GoogleGeocode\Result\GeoLookupResult instance
+// Retrieving the first lookup result as ChromaX\GoogleGeocode\Result\GeoLookupResult instance
 $firstResult = $addressLookup->getFirstResult();
 
-// Retieving address information as Markenwerk\GoogleGeocode\GeoLocation\GeoLocationAddress
+// Retieving address information as ChromaX\GoogleGeocode\GeoLocation\GeoLocationAddress
 $geoLocationAddress = $firstResult->getAddress();
 
 if($firstResult->hasAddress()) {
@@ -233,12 +233,12 @@ if($firstResult->hasGooglePlacesId()) {
 ## Exception handling
 
 PHP Google Geocoder provides different exceptions provided by the PHP Common Exceptions project for proper handling.  
-You can find more information about [PHP Common Exceptions at Github](https://github.com/markenwerk/php-common-exceptions).
+You can find more information about [PHP Common Exceptions at Github](https://github.com/chroma-x/php-common-exceptions).
 
 ## Contribution
 
 Contributing to our projects is always very appreciated.  
-**But: please follow the contribution guidelines written down in the [CONTRIBUTING.md](https://github.com/markenwerk/php-google-geocoder/blob/master/CONTRIBUTING.md) document.**
+**But: please follow the contribution guidelines written down in the [CONTRIBUTING.md](https://github.com/chroma-x/php-google-geocoder/blob/master/CONTRIBUTING.md) document.**
 
 ## License
 

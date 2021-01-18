@@ -1,13 +1,13 @@
 <?php
 
-namespace Markenwerk\GoogleGeocode\Lookup;
+namespace ChromaX\GoogleGeocode\Lookup;
 
-use Markenwerk\CommonException;
+use ChromaX\CommonException;
 
 /**
  * Class GeoLocationLookup
  *
- * @package Markenwerk\GoogleGeocode\Lookup
+ * @package ChromaX\GoogleGeocode\Lookup
  */
 class GeoLocationLookup extends AbstractLookup
 {

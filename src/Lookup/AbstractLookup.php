@@ -1,15 +1,17 @@
 <?php
 
-namespace Markenwerk\GoogleGeocode\Lookup;
+namespace ChromaX\GoogleGeocode\Lookup;
 
-use Markenwerk\CommonException;
-use Markenwerk\GoogleGeocode;
-use Markenwerk\GoogleDataStructure;
+use ChromaX\CommonException;
+use ChromaX\GoogleDataStructure\GeoLocation\GeoLocationAddress;
+use ChromaX\GoogleDataStructure\GeoLocation\GeoLocationGeometry;
+use ChromaX\GoogleGeocode;
+use ChromaX\GoogleGeocode\Result\GeoLookupResult;
 
 /**
  * Class AbstractLookup
  *
- * @package Markenwerk\GoogleGeocode\Lookup
+ * @package ChromaX\GoogleGeocode\Lookup
  */
 abstract class AbstractLookup
 {
@@ -61,7 +63,7 @@ abstract class AbstractLookup
 	 */
 	public function getFirstResult()
 	{
-		if (count($this->results) == 0) {
+		if (count($this->results) === 0) {
 			return null;
 		}
 		return $this->results[0];
@@ -108,13 +110,13 @@ abstract class AbstractLookup
 		}
 
 		$responseStatus = mb_strtoupper($responseData['status']);
-		if ($responseStatus == 'OVER_QUERY_LIMIT') {
+		if ($responseStatus === 'OVER_QUERY_LIMIT') {
 			$exceptionMessage = $this->buildExceptionMessage('Google Geocoder request limit reached', $responseData);
 			throw new CommonException\ApiException\RequestQuotaException($exceptionMessage);
-		} else if ($responseStatus == 'REQUEST_DENIED') {
+		} else if ($responseStatus === 'REQUEST_DENIED') {
 			$exceptionMessage = $this->buildExceptionMessage('Google Geocoder request was denied', $responseData);
 			throw new CommonException\ApiException\AuthenticationException($exceptionMessage);
-		} else if ($responseStatus != 'OK') {
+		} else if ($responseStatus !== 'OK') {
 			$exceptionMessage = $this->buildExceptionMessage('Google Geocoder no results', $responseData);
 			throw new CommonException\ApiException\NoResultException($exceptionMessage);
 		}
@@ -139,15 +141,15 @@ abstract class AbstractLookup
 	 */
 	protected function addResultsFromResponse($responseData)
 	{
-		for ($i = 0; $i < count($responseData['results']); $i++) {
+		for ($i = 0, $n = count($responseData['results']); $i < $n; $i++) {
 			$address = $responseData['results'][$i]['address_components'];
 			$geometry = $responseData['results'][$i]['geometry'];
 			$placesId = $responseData['results'][$i]['place_id'];
-			$locationAddress = new GoogleDataStructure\GeoLocation\GeoLocationAddress();
+			$locationAddress = new GeoLocationAddress();
 			$locationAddress->setFromServiceResult($address);
-			$locationGeometry = new GoogleDataStructure\GeoLocation\GeoLocationGeometry();
+			$locationGeometry = new GeoLocationGeometry();
 			$locationGeometry->setFromServiceResult($geometry);
-			$this->addResult(new GoogleGeocode\Result\GeoLookupResult($locationAddress, $locationGeometry, $placesId));
+			$this->addResult(new GeoLookupResult($locationAddress, $locationGeometry, $placesId));
 		}
 		return $this;
 	}

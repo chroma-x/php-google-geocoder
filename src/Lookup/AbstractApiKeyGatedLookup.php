@@ -1,13 +1,13 @@
 <?php
 
-namespace Markenwerk\GoogleGeocode\Lookup;
+namespace ChromaX\GoogleGeocode\Lookup;
 
-use Markenwerk\GoogleGeocode;
+use ChromaX\GoogleGeocode;
 
 /**
  * Class AbstractApiKeyGatedLookup
  *
- * @package Markenwerk\GoogleGeocode\Lookup
+ * @package ChromaX\GoogleGeocode\Lookup
  */
 abstract class AbstractApiKeyGatedLookup extends AbstractLookup
 {

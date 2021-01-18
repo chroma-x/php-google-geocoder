@@ -1,37 +1,36 @@
 {
-  "name": "markenwerk/google-geocoder",
-  "type": "library",
-  "description": "A PHP library to query Google's location service for geolocation and reverse lookups based on a given address, a geo location or a Google Places ID.",
-  "keywords": [
-    "Google",
-    "Geolocation",
-    "Geolookup"
-  ],
-  "homepage": "http://markenwerk.net/",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Martin Brecht-Precht",
-      "email": "mb@markenwerk.net",
-      "homepage": "http://markenwerk.net"
-    }
-  ],
-  "autoload": {
-    "psr-4": {
-      "Markenwerk\\GoogleGeocode\\": "src/"
-    }
-  },
-  "require": {
-    "php": ">=5.3",
-    "lib-curl": "*",
-    "markenwerk/common-exceptions": "~3.0",
-    "markenwerk/google-datastructures": "~2.0"
-  },
-  "require-dev":{
-    "phpunit/phpunit": "~4.8",
-    "codeclimate/php-test-reporter": "dev-master"
-  },
-  "suggest": {
-    "markenwerk/google-places-suite": "A PHP library to query Google's Places service for querying locations and addresses and getting details by Places ID."
-  }
+	"name": "chroma-x/google-geocoder",
+	"type": "library",
+	"description": "A PHP library to query Google's location service for geolocation and reverse lookups based on a given address, a geo location or a Google Places ID.",
+	"keywords": [
+		"Google",
+		"Geolocation",
+		"Geolookup"
+	],
+	"homepage": "http://chroma-x.de/",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Martin Brecht-Precht",
+			"email": "mb@chroma-x.de",
+			"homepage": "http://chroma-x.de"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"ChromaX\\GoogleGeocode\\": "src/"
+		}
+	},
+	"require": {
+		"php": ">=5.3",
+		"ext-curl": "*",
+		"lib-curl": "*",
+		"ext-json": "*",
+		"chroma-x/common-exceptions": "~3.0",
+		"chroma-x/google-datastructures": "~2.0"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "~4.8",
+		"codeclimate/php-test-reporter": "dev-master"
+	}
 }

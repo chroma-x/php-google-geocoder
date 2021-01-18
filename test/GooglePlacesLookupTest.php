@@ -1,13 +1,13 @@
 <?php
 
-namespace Markenwerk\GoogleGeocode\Lookup;
+namespace ChromaX\GoogleGeocode\Lookup;
 
-use Markenwerk\CommonException;
+use ChromaX\CommonException;
 
 /**
  * Class GooglePlacesLookupTest
  *
- * @package Markenwerk\GoogleGeocode
+ * @package ChromaX\GoogleGeocode
  */
 class GooglePlacesLookupTest extends \PHPUnit_Framework_TestCase
 {
@@ -42,7 +42,7 @@ class GooglePlacesLookupTest extends \PHPUnit_Framework_TestCase
 		// Validate results
 		$this->assertEquals(1, $googlePlacesLookup->getResultCount());
 		$firstResult = $googlePlacesLookup->getFirstResult();
-		$this->assertInstanceOf('Markenwerk\\GoogleGeocode\\Result\\GeoLookupResult', $firstResult);
+		$this->assertInstanceOf('ChromaX\\GoogleGeocode\\Result\\GeoLookupResult', $firstResult);
 
 		// Address result
 		$this->assertTrue($firstResult->hasAddress());

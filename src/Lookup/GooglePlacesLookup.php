@@ -1,13 +1,13 @@
 <?php
 
-namespace Markenwerk\GoogleGeocode\Lookup;
+namespace ChromaX\GoogleGeocode\Lookup;
 
-use Markenwerk\CommonException;
+use ChromaX\CommonException;
 
 /**
  * Class GooglePlacesLookup
  *
- * @package Markenwerk\GoogleGeocode\Lookup
+ * @package ChromaX\GoogleGeocode\Lookup
  */
 class GooglePlacesLookup extends AbstractApiKeyGatedLookup
 {
