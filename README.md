@@ -34,12 +34,20 @@ require_once('path/to/vendor/autoload.php');
 
 #### Resolving an address
 
+The API provides an optional usage of an API key to circumvent API quota limits. Please visit the [Google API console](https://console.developers.google.com/apis/api/geocoding_backend?project=_) to receive an API key.
+
 ```{php}
 use ChromaX\CommonException;
 
 try{
 	// Perform lookup
 	$addressLookup = new ChromaX\GoogleGeocode\Lookup\AddressLookup();
+	$addressLookup = new Markenwerk\GoogleGeocode\Lookup\AddressLookup();
+
+	// Optional adding an API key
+	$addressLookup->setApiKey('MY_GOOGLE_GEOCODING_API_KEY');
+
+	// Submit lookup
 	$addressLookup->lookup('Germany, 24105 Kiel, Lornsenstraße 43');
 
 	// Retrieving the lookup as an array of ChromaX\GoogleGeocode\Result\GeoLookupResult instances
@@ -65,12 +73,20 @@ try{
 
 #### Resolving a geo location
 
+The API provides an optional usage of an API key to circumvent API quota limits. Please visit the [Google API console](https://console.developers.google.com/apis/api/geocoding_backend?project=_) to receive an API key.
+
 ```{php}
 use ChromaX\CommonException;
 
 try{
 	// Perform lookup
 	$geoLocationLookup = new ChromaX\GoogleGeocode\Lookup\GeoLocationLookup();
+	$geoLocationLookup = new Markenwerk\GoogleGeocode\Lookup\GeoLocationLookup();
+
+	// Optional adding an API key
+	$geoLocationLookup->setApiKey('MY_GOOGLE_GEOCODING_API_KEY');
+
+	// Submit lookup
 	$geoLocationLookup->lookup(54.334123, 10.1364007);
 
 	// Retrieving the lookup as an array of ChromaX\GoogleGeocode\Result\GeoLookupResult instances
